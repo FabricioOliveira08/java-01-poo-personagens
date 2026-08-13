@@ -1,6 +1,6 @@
 public class Jogador {
     private String nome;
-    private String personagemEscolhido;
+    private Personagem personagemEscolhido;
     private int pontuacao;
 
     public String getNome() {
@@ -15,23 +15,49 @@ public class Jogador {
         return pontuacao;
     }
 
-    public String getPersonagemEscolhido() {
+    public Personagem getPersonagemEscolhido() {
         return personagemEscolhido;
     }
 
+    public Jogador(String nome, Personagem personagemEscolhido, int pontuacao){
+        this.nome = nome;
+        this.personagemEscolhido = personagemEscolhido;
+        this.pontuacao = pontuacao;
+    }
+
     public void exibirInfo() {
+        System.out.println("Nome do jogador: " + nome);
+        System.out.println("Pontuação do Jogador: " + pontuacao);
+        if(this.personagemEscolhido != null) {
+            personagemEscolhido.exibirStatus();
+        }else {
+            System.out.println("Nenhum personagem foi escolhido ainda.");
+        }
+    }
+
+    public void escolherPersonagem(Personagem personagem) {
+        if(personagem == null) {
+            System.out.println("Não é possível escolher um personagem inválido.");
+        }else {
+            this.personagemEscolhido = personagem;
+        }
+    }
+
+    public void adicionaPontos(int pontosAdicionais) {
+        if(pontosAdicionais > 0){
+            this.pontuacao += pontosAdicionais;
+        }
 
     }
 
-    public void escolherPersonagem() {
-
-    }
-
-    public void addPontos() {
-
-    }
-
-    public void removerPontos() {
+    public void removerPontos(int pontosRemovidos) {
+        if(pontosRemovidos > 0) {
+            if(pontosRemovidos > this.pontuacao) {
+                this.pontuacao = 0;
+            }else {
+                this.pontuacao -= pontosRemovidos;
+            }
+        }
 
     }
 }
